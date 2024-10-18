@@ -129,4 +129,5 @@
   .yarn/build-state.yml
   .yarn/install-state.gz
   
-  .next/
+/.next
+/node_modules
