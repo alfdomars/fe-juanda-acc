@@ -10,7 +10,7 @@ import type { Navigation, Session } from "@toolpad/core";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import Image from "next/image";
-
+import { Toaster } from "react-hot-toast";
 import theme from "../theme";
 
 const NAVIGATION: Navigation = [
@@ -94,6 +94,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       image: "https://avatars.githubusercontent.com/u/19550456",
     },
   });
+
   const authentication = React.useMemo(() => {
     return {
       signIn: () => {
@@ -110,6 +111,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       },
     };
   }, []);
+
   return (
     <html lang="en" data-toolpad-color-scheme="light" suppressHydrationWarning>
       <body>
@@ -122,6 +124,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
             theme={theme}
           >
             {props.children}
+            <Toaster position="top-right" reverseOrder={false} />
           </AppProvider>
         </AppRouterCacheProvider>
       </body>

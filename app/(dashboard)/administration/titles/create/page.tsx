@@ -1,34 +1,53 @@
 "use client";
 
-import * as React from "react";
+import { Box, Button, Typography } from "@mui/material";
+import InputField from "@/app/components/forms/InputField";
+import SelectField from "@/app/components/forms/SelectField";
+import Form from "@/app/components/forms/Form";
 import { useRouter } from "next/navigation";
-import CreateForm from "@/app/components/forms/CreateForm";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { titleSchema } from "@/app/lib/validationSchemas";
 
-const CreatePage: React.FC = () => {
+const TitleCreate = () => {
   const router = useRouter();
 
-  const fields = [
-    {
-      name: "title",
-      label: "Title",
-      type: "text",
+  // Menggunakan zodResolver untuk validasi schema Zod
+  const methods = useForm({
+    resolver: zodResolver(titleSchema),
+    defaultValues: {
+      titleName: "",
+      status: "active",
     },
-  ];
+  });
 
-  const handleSubmit = (data: Record<string, any>) => {
-    console.log("Data submitted:", data);
+  const onSubmit = (data: any) => {
+    // Handle form submission logic, e.g., calling an API
+    console.log("Form Data: ", data);
     router.push("/administration/titles");
   };
 
-  const handleBack = () => {
-    router.back();
-  };
-
   return (
-    <div>
-      <CreateForm fields={fields} onSubmit={handleSubmit} onBack={handleBack} />
-    </div>
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        Create Title
+      </Typography>
+      <Form onSubmit={onSubmit} methods={methods}>
+        <InputField name="titleName" label="Title Name" />
+        <SelectField
+          name="status"
+          label="Status"
+          options={[
+            { label: "Active", value: "active" },
+            { label: "Inactive", value: "inactive" },
+          ]}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </Form>
+    </Box>
   );
 };
 
-export default CreatePage;
+export default TitleCreate;
