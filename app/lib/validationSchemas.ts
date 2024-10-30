@@ -6,3 +6,10 @@ export const titleSchema = z.object({
     errorMap: () => ({ message: "Status is required" }),
   }),
 });
+
+export const formSchema = z.object({
+  amount: z
+    .string()
+    .min(1, "Amount is required") // Ensure it's not empty
+    .regex(/^\d+(\.\d{1,2})?$/, "Amount must be a valid number"), // Ensure it matches the number format
+});

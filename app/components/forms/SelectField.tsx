@@ -24,6 +24,8 @@ const SelectField = ({ name, label, options }: SelectFieldProps) => {
           error={!!error}
           helperText={error ? error.message : null}
           margin="normal"
+          size="small"
+          variant="standard"
         >
           {options.map((option) => (
             <MenuItem key={option.value} value={option.value}>

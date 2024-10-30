@@ -1,47 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-} from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-
-interface Title {
-  id: number;
-  name: string;
-}
+import ServerDataGrid from "@/app/components/datagrid/ServerDataGrid"; // Adjust the import path accordingly
+import { titleColumns } from "@/app/components/datagrid/columnsConfig"; // Import column configuration
+import CreateButton from "@/app/components/buttons/CreateButton"; // Import the new CreateButton
 
 const TitlePage = () => {
-  const [titles, setTitles] = useState<Title[]>([]);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const [loading, setLoading] = useState(false); // State to manage loading
 
-  useEffect(() => {
-    const fetchTitles = async () => {
-      try {
-        const response = await fetch("/api/titles");
-        if (!response.ok) {
-          throw new Error("Failed to fetch titles");
-        }
-        const data: Title[] = await response.json();
-        setTitles(data);
-      } catch (error) {
-        console.error("Error fetching titles:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTitles();
-  }, []);
-
-  const handleCreate = () => {
+  const handleCreate = async () => {
+    setLoading(true); // Set loading state to true before navigation
+    await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate a delay (optional)
     router.push("/administration/titles/create");
+    setLoading(false); // Reset loading state after navigation
   };
 
   return (
@@ -55,30 +29,16 @@ const TitlePage = () => {
         <Typography variant="h5" gutterBottom>
           Title List
         </Typography>
-        <Button variant="contained" color="primary" onClick={handleCreate}>
-          Create New Title
-        </Button>
+        <CreateButton
+          loading={loading} // Pass loading state to CreateButton
+          onCreate={handleCreate} // Pass the handleCreate function
+        />
       </Box>
 
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <Card variant="outlined">
-          <CardContent>
-            {titles.length === 0 ? (
-              <Typography>No titles available</Typography>
-            ) : (
-              <ul>
-                {titles.map((title) => (
-                  <li key={title.id}>
-                    <Typography>{title.name}</Typography>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </CardContent>
-        </Card>
-      )}
+      <ServerDataGrid
+        columns={titleColumns} // Use the imported columns configuration
+        apiEndpoint="/api/titles" // This should point to your titles API
+      />
     </Box>
   );
 };

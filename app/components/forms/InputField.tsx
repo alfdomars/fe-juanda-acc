@@ -24,6 +24,8 @@ const InputField = ({ name, label, type = "text" }: InputFieldProps) => {
           error={!!error}
           helperText={error ? error.message : null}
           margin="normal"
+          size="small"
+          variant="standard"
         />
       )}
     />
