@@ -4,17 +4,17 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ServerDataGrid from "@/app/components/datagrid/ServerDataGrid";
-import { titleColumns } from "@/app/components/datagrid/columnsConfig";
+import { expenseColumns } from "@/app/components/datagrid/columnsConfig";
 import CreateButton from "@/app/components/buttons/CreateButton";
 
-const TitlePage = () => {
+const ExpensePage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleCreate = async () => {
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
-    router.push("/administration/titles/create");
+    router.push("/expenses/create");
     setLoading(false);
   };
 
@@ -27,14 +27,14 @@ const TitlePage = () => {
         sx={{ mb: 2 }}
       >
         <Typography variant="h5" gutterBottom>
-          Title List
+          Expense List
         </Typography>
         <CreateButton loading={loading} onCreate={handleCreate} />
       </Box>
 
-      <ServerDataGrid columns={titleColumns} apiEndpoint="/api/titles" />
+      <ServerDataGrid columns={expenseColumns} apiEndpoint="/api/expenses" />
     </Box>
   );
 };
 
-export default TitlePage;
+export default ExpensePage;

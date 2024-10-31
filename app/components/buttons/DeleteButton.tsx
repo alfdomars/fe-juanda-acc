@@ -2,8 +2,8 @@ import React from "react";
 import { Button, CircularProgress } from "@mui/material";
 
 interface DeleteButtonProps {
-  onDelete: () => void; // Callback function when the button is clicked
-  loading?: boolean; // Optional loading state
+  onDelete: () => void;
+  loading?: boolean;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete, loading }) => {
@@ -12,8 +12,8 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete, loading }) => {
       variant="outlined"
       color="secondary"
       onClick={onDelete}
-      disabled={loading} // Disable button if loading
-      style={{ marginLeft: 8 }} // Ensure consistent spacing
+      disabled={loading}
+      style={{ marginLeft: 8 }}
     >
       {loading ? <CircularProgress size={24} /> : "Delete"}
     </Button>

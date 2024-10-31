@@ -4,58 +4,51 @@ import { Box, Paper, Typography } from "@mui/material";
 import InputField from "@/app/components/forms/InputField";
 import SelectField from "@/app/components/forms/SelectField";
 import Form from "@/app/components/forms/Form";
-import SaveButton from "@/app/components/buttons/SaveButton"; // Import the new SaveButton
+import SaveButton from "@/app/components/buttons/SaveButton";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { titleSchema } from "@/app/lib/validationSchemas";
 import { useState } from "react";
+import BackButton from "@/app/components/buttons/BackButton";
 
-// Define the shape of the form values
 interface TitleFormValues {
   titleName: string;
   titleCode: string;
   status: string;
 }
 
-// Extract default values into a constant
 const defaultValues: TitleFormValues = {
   titleName: "",
   titleCode: "",
-  status: "active",
+  status: "",
 };
 
 const TitleCreate = () => {
   const router = useRouter();
 
-  // Local state for tracking API submission errors
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [loading, setLoading] = useState(false);
 
-  // Using zodResolver for schema validation
   const methods = useForm<TitleFormValues>({
     resolver: zodResolver(titleSchema),
     defaultValues,
   });
 
-  // Async onSubmit function to handle form submission with API
   const onSubmit = async (data: TitleFormValues) => {
-    setSubmitError(null); // Reset error state before new submission
-    setLoading(true); // Set loading state to true
+    setSubmitError(null);
+    setLoading(true);
     try {
-      // Simulate API call (replace with real API call)
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate 1 second delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // If successful, redirect or reset the form
       router.push("/administration/titles");
     } catch (error) {
-      // Handle any errors that occur during submission
       console.error("Failed to submit the form", error);
       setSubmitError(
         "There was an issue submitting the form. Please try again."
       );
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -76,18 +69,19 @@ const TitleCreate = () => {
               { label: "Inactive", value: "inactive" },
             ]}
           />
-          {/* Display error message if submit fails */}
           {submitError && (
             <Typography color="error" variant="body2" gutterBottom>
               {submitError}
             </Typography>
           )}
 
-          {/* Use SaveButton with loading state handling */}
-          <SaveButton
-            onSave={methods.handleSubmit(onSubmit)} // Call the onSubmit function
-            loading={loading} // Pass loading state to SaveButton
-          />
+          <Box display="flex" justifyContent="flex-end" gap={2}>
+            <BackButton loading={loading} />
+            <SaveButton
+              onSave={methods.handleSubmit(onSubmit)}
+              loading={loading}
+            />
+          </Box>
         </Form>
       </Paper>
     </Box>

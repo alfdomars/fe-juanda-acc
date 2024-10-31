@@ -1,26 +1,13 @@
 "use client";
 import React from "react";
-import { DateRangePicker, DateRange } from "date-range-picker-mui";
+import SomeComponent from "@/app/components/SomeComponent";
 
-const HomePage = () => {
-  const [open, setOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState<DateRange>({});
-
-  const toggle = () => setOpen(!open);
-
+const HomePage: React.FC = () => {
   return (
-    <div>
-      <button onClick={toggle}>Select Date Range</button>
-      <DateRangePicker
-        open={open}
-        toggle={toggle}
-        onChange={(range) => setDateRange(range)}
-      />
-      <p>
-        Selected: {dateRange.startDate?.toLocaleDateString()} -{" "}
-        {dateRange.endDate?.toLocaleDateString()}
-      </p>
-    </div>
+    <main style={{ padding: "2rem" }}>
+      <h1>Welcome to My Next.js App</h1>
+      <SomeComponent />
+    </main>
   );
 };
 

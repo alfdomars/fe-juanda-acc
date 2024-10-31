@@ -3,14 +3,14 @@ import { Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 interface BackButtonProps {
-  loading?: boolean; // Optional loading state
+  loading?: boolean;
 }
 
 const BackButton: React.FC<BackButtonProps> = ({ loading }) => {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back(); // Navigate to the previous page
+    router.back();
   };
 
   return (

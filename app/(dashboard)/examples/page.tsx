@@ -37,6 +37,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateRangePicker, DateRange } from "date-range-picker-mui";
 import { toast } from "react-hot-toast";
+import { Label } from "@mui/icons-material";
 
 const ExamplesPage: React.FC = () => {
   const [gender, setGender] = React.useState("");
@@ -315,6 +316,38 @@ const ExamplesPage: React.FC = () => {
             Selected: {dateRange.startDate?.toLocaleDateString()} -{" "}
             {dateRange.endDate?.toLocaleDateString()}
           </p>
+        </Box>
+        <Box sx={{ marginTop: 4 }}>
+          <Typography variant="subtitle1">
+            COMPONENT-Material UI:{" "}
+            <a
+              href="https://mui.com/material-ui/react-stepper/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://mui.com/material-ui/react-stepper/
+            </a>
+          </Typography>
+          <Typography variant="subtitle1">
+            DATAGRID-MUIX:{" "}
+            <a
+              href="https://mui.com/x/react-data-grid/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://mui.com/x/react-data-grid/
+            </a>
+          </Typography>
+          <Typography variant="subtitle1">
+            TEMPLATE-Toolpad:{" "}
+            <a
+              href="https://mui.com/toolpad/core/introduction/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://mui.com/toolpad/core/introduction/
+            </a>
+          </Typography>
         </Box>
       </Paper>
     </Box>

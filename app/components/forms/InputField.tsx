@@ -24,8 +24,12 @@ const InputField = ({ name, label, type = "text" }: InputFieldProps) => {
           error={!!error}
           helperText={error ? error.message : null}
           margin="normal"
-          size="small"
-          variant="standard"
+          size="medium"
+          variant="outlined"
+          slotProps={{
+            input: { sx: { fontSize: 15 } },
+            inputLabel: { sx: { fontSize: 15 } },
+          }}
         />
       )}
     />

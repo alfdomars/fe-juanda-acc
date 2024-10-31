@@ -9,6 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import type { Navigation, Session } from "@toolpad/core";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 import theme from "../theme";
@@ -57,6 +58,19 @@ const NAVIGATION: Navigation = [
         title: "NGRS",
       },
     ],
+  },
+  {
+    kind: "header",
+    title: "Accounting",
+  },
+  {
+    segment: "expenses",
+    title: "Expenses",
+    icon: <AccountBalanceWalletIcon />,
+  },
+  {
+    kind: "header",
+    title: "Settings",
   },
   {
     segment: "administration",

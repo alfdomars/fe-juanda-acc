@@ -24,9 +24,16 @@ const SelectField = ({ name, label, options }: SelectFieldProps) => {
           error={!!error}
           helperText={error ? error.message : null}
           margin="normal"
-          size="small"
-          variant="standard"
+          size="medium"
+          variant="outlined"
+          slotProps={{
+            input: { sx: { fontSize: 15 } },
+            inputLabel: { sx: { fontSize: 15 } },
+          }}
         >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
           {options.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}

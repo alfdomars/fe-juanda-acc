@@ -6,16 +6,16 @@ interface NumericFormatInputProps {
   name: string;
   label: string;
   required?: boolean;
-  decimalScale?: number; // Allow specifying decimal precision
-  allowNegative?: boolean; // Allow specifying negative numbers
+  decimalScale?: number;
+  allowNegative?: boolean;
 }
 
 const NumericFormatInput = ({
   name,
   label,
   required = false,
-  decimalScale = 2, // Default to 2 decimal places
-  allowNegative = false, // Default to no negative numbers
+  decimalScale = 2,
+  allowNegative = false,
 }: NumericFormatInputProps) => {
   const { control } = useFormContext();
 
@@ -26,18 +26,26 @@ const NumericFormatInput = ({
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
         <NumericFormat
-          {...field}
-          customInput={TextField} // Use Material-UI's TextField
+          value={field.value || ""} // Use field value from react-hook-form
+          onValueChange={(values) => {
+            field.onChange(values.floatValue); // Pass formatted value to field onChange
+          }}
+          customInput={TextField}
           label={label}
-          thousandSeparator="," // Set thousand separator
-          decimalScale={decimalScale} // Set number of decimals
-          allowNegative={allowNegative} // Whether to allow negative numbers
+          thousandSeparator="."
+          decimalSeparator=","
+          decimalScale={decimalScale}
+          allowNegative={allowNegative}
           fullWidth
-          error={!!error} // Show error state
-          helperText={error ? error.message : null} // Show error message from validation
+          error={!!error}
+          helperText={error ? error.message : null}
           margin="normal"
-          size="small"
-          variant="standard"
+          size="medium"
+          variant="outlined"
+          slotProps={{
+            input: { sx: { fontSize: 15 } },
+            inputLabel: { sx: { fontSize: 15 } },
+          }}
         />
       )}
     />
