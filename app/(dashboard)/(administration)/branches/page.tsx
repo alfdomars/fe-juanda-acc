@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import FormDialog from "@/components/modals/FormDialog";
 import TextFieldCus from "@/components/forms/TextFieldCus";
 import CreateButton from "@/components/buttons/CreateButton"; // Import CreateButton
@@ -41,11 +41,8 @@ const BranchPage = () => {
         methods={methods}
         loading={loading}
       >
-        <Suspense>
-          <TextFieldCus name="name" label="Branch Name" />
-          <TextFieldCus name="location" label="Location" />
-        </Suspense>
-
+        <TextFieldCus name="name" label="Branch Name" />
+        <TextFieldCus name="location" label="Location" />
         <SelectCus
           name="status"
           label="Status"
