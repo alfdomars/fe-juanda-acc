@@ -1,16 +1,16 @@
 "use client";
 
 import { Box, Paper, Typography } from "@mui/material";
-import InputField from "@/app/components/forms/InputField";
-import SelectField from "@/app/components/forms/SelectField";
-import Form from "@/app/components/forms/Form";
-import SaveButton from "@/app/components/buttons/SaveButton";
+import TextFieldCus from "@/components/forms/TextFieldCus";
+import SelectCus from "@/components/forms/SelectCus";
+import FormCus from "@/components/forms/FormCus";
+import SaveButton from "@/components/buttons/SaveButton";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { titleSchema } from "@/app/lib/validationSchemas";
+import { titleSchema } from "@/lib/validationSchemas";
 import { useState } from "react";
-import BackButton from "@/app/components/buttons/BackButton";
+import BackButton from "@/components/buttons/BackButton";
 
 interface TitleFormValues {
   titleName: string;
@@ -58,10 +58,10 @@ const TitleCreate = () => {
         Create Title
       </Typography>
       <Paper elevation={3} sx={{ padding: 3 }}>
-        <Form onSubmit={onSubmit} methods={methods}>
-          <InputField name="titleName" label="Title Name" />
-          <InputField name="titleCode" label="Title Code" />
-          <SelectField
+        <FormCus onSubmit={onSubmit} methods={methods}>
+          <TextFieldCus name="titleName" label="Title Name" />
+          <TextFieldCus name="titleCode" label="Title Code" />
+          <SelectCus
             name="status"
             label="Status"
             options={[
@@ -82,7 +82,7 @@ const TitleCreate = () => {
               loading={loading}
             />
           </Box>
-        </Form>
+        </FormCus>
       </Paper>
     </Box>
   );
